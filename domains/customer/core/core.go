@@ -1,6 +1,6 @@
 package customercore
 
 type Core struct {
-	Name  string
-	Saldo float64
+	Name     string
+	Ballance float64
 }
