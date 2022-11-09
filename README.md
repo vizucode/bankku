@@ -91,6 +91,7 @@ why use ORM? because to make it easier for me to make a query, so it doesn't tak
 <br>
 I use golang, because the language I currently use is golang, I want to learn to use golang, and based on benchmarks I read that golang has a pretty good speed.
 <br>
+
 * [![Mysql][mysql]][mysql-url]
 <br>
 I use mysql DBMS, because it is easy to implement and also relational, for example later this application is developed, it will be more flexible and easy to use relational DBMS
