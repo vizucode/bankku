@@ -2,7 +2,7 @@ package database
 
 import (
 	"bankku/config"
-	usermodel "bankku/domains/customer/model"
+	customermodel "bankku/domains/customer/model"
 	"fmt"
 	"log"
 
@@ -31,6 +31,6 @@ func InitDB(cfg *config.AppConfig) *gorm.DB {
 
 func autoMigrate(db *gorm.DB) {
 	db.AutoMigrate(
-		&usermodel.User{},
+		&customermodel.Customer{},
 	)
 }

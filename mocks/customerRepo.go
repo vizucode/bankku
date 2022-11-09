@@ -13,8 +13,8 @@ type CustomerRepo struct {
 	mock.Mock
 }
 
-// FindUser provides a mock function with given fields: customerCore
-func (_m *CustomerRepo) FindUser(customerCore customercore.Core) (customercore.Core, error) {
+// FindCustomer provides a mock function with given fields: customerCore
+func (_m *CustomerRepo) FindCustomer(customerCore customercore.Core) (customercore.Core, error) {
 	ret := _m.Called(customerCore)
 
 	var r0 customercore.Core
@@ -32,6 +32,20 @@ func (_m *CustomerRepo) FindUser(customerCore customercore.Core) (customercore.C
 	}
 
 	return r0, r1
+}
+
+// InsertCustomer provides a mock function with given fields: customerCore
+func (_m *CustomerRepo) InsertCustomer(customerCore customercore.Core) error {
+	ret := _m.Called(customerCore)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(customercore.Core) error); ok {
+		r0 = rf(customerCore)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
 }
 
 // UpdateSaldo provides a mock function with given fields: customerCore

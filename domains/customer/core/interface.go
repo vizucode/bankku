@@ -9,6 +9,6 @@ type IRepoCustomer interface {
 type IServiceCustomer interface {
 	CreateCustomer(username string) error
 	Login(username string) (Core, error)
-	TopUp(username string, price float64) error
-	Withdraw(username string, price float64) error
+	TopUp(username string, price float64) (float64, error)
+	Withdraw(username string, price float64) (float64, error)
 }
