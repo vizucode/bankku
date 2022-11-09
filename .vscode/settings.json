@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///home/vizu-arch/Project/Study/alterra/project/e-commerce/.github/workflows/deploy.yaml"
+    }
+}
