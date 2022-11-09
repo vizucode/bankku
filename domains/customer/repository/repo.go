@@ -17,7 +17,20 @@ func New(db *gorm.DB) *customerRepo {
 	}
 }
 
-func (r *customerRepo) FindUser(customerCore customercore.Core) (customercore.Core, error) {
+func (r *customerRepo) InsertCustomer(customerCore customercore.Core) error {
+	model := customermodel.Customer{
+		Name: customerCore.Name,
+	}
+
+	tx := r.db.Model(customermodel.Customer{}).Create(&model)
+	if tx.Error != nil {
+		return tx.Error
+	}
+
+	return nil
+}
+
+func (r *customerRepo) FindCustomer(customerCore customercore.Core) (customercore.Core, error) {
 	model := customermodel.Customer{}
 
 	tx := r.db.Model(customermodel.Customer{}).Where("name", customerCore.Name).First(&model)
