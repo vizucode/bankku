@@ -111,6 +111,13 @@ I use mysql DBMS, because it is easy to implement and also relational, for examp
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+## Unit Test Coverage
+
+<img src="https://i.ibb.co/NS8jFqn/Screenshot-20221109-123529.png" alt="unit-test-coverage">
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 <!-- Developement -->
 ## Developement
 
@@ -126,6 +133,11 @@ Command to run environment :
 ```bash
 ./run.sh
 ```
+Command to start testing :
+```bash
+./test.sh
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
