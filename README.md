@@ -102,10 +102,11 @@ I use mysql DBMS, because it is easy to implement and also relational, for examp
 ## Download Page
 
 ### Windows
----
+[windows](https://github.com/vizucode/bankku/releases/download/1%2C0%2C0/bankku.exe)
 ### Mac
----
+[Mac](https://github.com/vizucode/bankku/releases/download/1%2C0%2C0/mac)
 ### Linux
+[Linux](https://github.com/vizucode/bankku/releases/download/1%2C0%2C0/linux)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
