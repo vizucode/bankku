@@ -2,7 +2,7 @@ package database
 
 import (
 	"bankku/config"
-	usermodel "bankku/domains/user/model"
+	usermodel "bankku/domains/customer/model"
 	"fmt"
 	"log"
 
