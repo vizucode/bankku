@@ -137,6 +137,21 @@ func TestTopUp(t *testing.T) {
 }
 
 func TestWithDraw(t *testing.T) {
+	t.Run("failed minimal wd", func(t *testing.T) {
+		repo := new(mocks.CustomerRepo)
+		repo.On("FindCustomer", mock.Anything).Return(customercore.Core{
+			Name:     "havis",
+			Ballance: 0,
+		}, nil).Once()
+		repo.On("UpdateSaldo", mock.Anything).Return(nil).Once()
+
+		service := New(repo)
+		ballance, err := service.Withdraw("havis", 5000)
+
+		assert.Equal(t, float64(0), ballance)
+		assert.Equal(t, config.MINIMAL_WD, err.Error())
+	})
+
 	t.Run("failed withdraw cause ballance not insuffience", func(t *testing.T) {
 		repo := new(mocks.CustomerRepo)
 		repo.On("FindCustomer", mock.Anything).Return(customercore.Core{

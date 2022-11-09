@@ -1,12 +1,22 @@
 package route
 
 import (
+	customerrepo "bankku/domains/customer/repository"
+	customerservice "bankku/domains/customer/service"
 	"bankku/utils/helpers"
 	"fmt"
 	"time"
+
+	"gorm.io/gorm"
 )
 
-func Route() {
+func Route(db *gorm.DB) {
+	/*
+		Dependency Injection
+	*/
+	customerRepo := customerrepo.New(db)
+	customerService := customerservice.New(customerRepo)
+
 	name := ""
 	isLogged := false
 
@@ -22,8 +32,8 @@ Selamat datang di aplikasi BANKKU
 			loginMsg := fmt.Sprintf(`
 Selamat datang %s di aplikasi BANKKU
 ====================================
-1. Tarik Tunai
-2. Isi Dana
+1. Isi Dana
+2. Penarikan Dana
 3. Keluar
 				`, name)
 			fmt.Println(loginMsg)
@@ -32,10 +42,38 @@ Selamat datang %s di aplikasi BANKKU
 			switch choose {
 			case 1:
 				helpers.ClearScreen()
-				fmt.Println("Isi Dana")
+				topupMsg := `
+[ Pengisian dana minimal adalah Rp.50.000 ].
+Masukkan jumlah top up
+					`
+				fmt.Println(topupMsg)
+				price := 0
+				fmt.Scan(&price)
+
+				result, err := customerService.TopUp(name, float64(price))
+				if err != nil {
+					fmt.Println(err.Error())
+				} else {
+					msg := fmt.Sprintf("%s telah top up sebesar %d dan saldo saat ini %f", name, price, result)
+					fmt.Println(msg)
+				}
 			case 2:
+				topupMsg := `
+[ Penarikan dana minimal adalah Rp.50.000 ].
+Masukkan jumlah penarikan
+									`
 				helpers.ClearScreen()
-				fmt.Println("tarik tunai")
+				fmt.Println(topupMsg)
+				price := 0
+				fmt.Scan(&price)
+
+				result, err := customerService.Withdraw(name, float64(price))
+				if err != nil {
+					fmt.Println(err.Error())
+				} else {
+					msg := fmt.Sprintf("%s telah ditarik sebesar %d dan saldo saat ini %f", name, price, result)
+					fmt.Println(msg)
+				}
 			case 3:
 				helpers.ClearScreen()
 				fmt.Println()
@@ -53,16 +91,34 @@ Selamat datang %s di aplikasi BANKKU
 			fmt.Scan(&choose)
 			if choose == 1 {
 				helpers.ClearScreen()
+
+				fmt.Println("Masukkan nama anda:")
+				username := ""
+
+				fmt.Scanln(&username)
+				helpers.ClearScreen()
+
+				err := customerService.CreateCustomer(username)
+				if err != nil {
+					fmt.Println(err.Error())
+				} else {
+					isLogged = true
+					name = username
+				}
+			} else if choose == 2 {
+				helpers.ClearScreen()
+
 				fmt.Println("Masukkan nama anda:")
 				username := ""
 				fmt.Scanln(&username)
-				helpers.ClearScreen()
-				isLogged = true
-				name = username
-			} else if choose == 2 {
-				helpers.ClearScreen()
-				isLogged = true
-				name = "kirito"
+
+				result, err := customerService.Login(username)
+				if err != nil {
+					fmt.Println(err.Error())
+				} else {
+					isLogged = true
+					name = result.Name
+				}
 			} else {
 				helpers.ClearScreen()
 				fmt.Println("Maaf inputan tidak sesuai")

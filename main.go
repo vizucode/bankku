@@ -1,9 +1,13 @@
 package main
 
 import (
+	"bankku/config"
 	"bankku/route"
+	database "bankku/utils/database/mysql"
 )
 
 func main() {
-	route.Route()
+	cfg := config.GetConfig()
+	db := database.InitDB(cfg)
+	route.Route(db)
 }

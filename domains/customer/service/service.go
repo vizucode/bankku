@@ -66,6 +66,10 @@ func (s *customerService) Withdraw(username string, price float64) (float64, err
 		Name: username,
 	}
 
+	if price < 50000 {
+		return 0, errors.New(config.MINIMAL_WD)
+	}
+
 	customerData, err := s.repo.FindCustomer(core)
 	if err != nil {
 		return 0, errors.New(config.INTERNAL_SERVER_ERROR)

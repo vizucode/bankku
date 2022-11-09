@@ -8,6 +8,7 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 func InitDB(cfg *config.AppConfig) *gorm.DB {
@@ -21,6 +22,7 @@ func InitDB(cfg *config.AppConfig) *gorm.DB {
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		SkipDefaultTransaction: true,
+		Logger:                 logger.Default.LogMode(logger.Error),
 	})
 	if err != nil {
 		log.Fatal(err)

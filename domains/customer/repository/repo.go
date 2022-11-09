@@ -49,7 +49,7 @@ func (r *customerRepo) UpdateSaldo(customerCore customercore.Core) error {
 		Ballance: customerCore.Ballance,
 	}
 
-	tx := r.db.Model(customermodel.Customer{}).Where("name", customerCore.Name).Updates(&model)
+	tx := r.db.Model(customermodel.Customer{}).Where("name", customerCore.Name).Select("ballance").Updates(&model)
 	if tx.Error != nil {
 		return tx.Error
 	}
